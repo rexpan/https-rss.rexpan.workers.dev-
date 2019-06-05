@@ -1,0 +1,29 @@
+{
+    "compilerOptions": {
+      "module": "esnext",
+      "target": "esnext",
+      "downlevelIteration": false,
+      "lib": [ "esnext", "webworker" ],
+      "esModuleInterop": true,
+      "allowSyntheticDefaultImports": true,
+      "moduleResolution": "node",
+      "resolveJsonModule": true,
+      "isolatedModules": true,
+      "skipLibCheck": false,
+      "strict": true,
+      "forceConsistentCasingInFileNames": true,
+      "noImplicitReturns": true,
+      "noUnusedLocals": false,
+      "suppressImplicitAnyIndexErrors": true,
+      "sourceMap": true,
+      "allowJs": true,
+      "outDir": "dist",
+    },
+    "include": [
+      "src/**/*"
+    ],
+    "exclude": [
+      "node_modules",
+      "**/*.spec.ts"
+    ]
+  }

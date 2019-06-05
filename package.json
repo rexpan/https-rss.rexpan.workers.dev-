@@ -1,0 +1,24 @@
+{
+    "name": "rss",
+    "version": "1.0.0",
+    "description": "My personal RSS filter feed",
+    "main": "dist/index.js",
+    "scripts": {
+        "build": "tsc",
+        "watch": "tsc -w",
+        "deploy": "wrangler publish",
+        "format": "prettier --write '**/*.{js,css,json,md}'"
+    },
+    "author": "Rex Pan <napxer@gmail.com>",
+    "license": "MIT",
+    "dependencies": {
+        "cheerio": "^1.0.0-rc.3",
+        "feed": "^3.0.0",
+        "feedparser": "^2.2.9"
+    },
+    "devDependencies": {
+        "@types/cheerio": "^0.22.11",
+        "@types/feedparser": "^2.2.2",
+        "typescript": "^3.5.1"
+    }
+}
