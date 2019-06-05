@@ -1,30 +1,34 @@
+import { Router } from "./utils/router";
+import { atomResponse } from "./utils/static";
 import { Processor as P9Gag } from "./9gag/Processor";
 import { Processor as PUdemy } from "./udemycoupon.learnviral.com/Processor";
 import { Processor as PFeng } from "./bbs.feng.com/Processor";
-import { atomResponse } from "./utils/static";
 
-const p9Gag = new P9Gag({});
+const p9Gag  = new P9Gag({});
 const pUdemy = new PUdemy({});
 const pFeng = new PFeng({});
 
-addEventListener('fetch', event => {
+// @ts-ignore
+addEventListener('fetch', (event:FetchEvent) => {
   event.respondWith(handleRequest(event.request))
 });
 
-/**
- * Fetch and log a request
- * @param {Request} request
- */
-async function handleRequest(request:Request) {
-  let processor;
-  if (request.url.includes("9gag")) processor = p9Gag;
-  else if (request.url.includes("udemy")) processor = pUdemy;
-  else if (request.url.includes("feng")) processor = pFeng;
+const r = new Router()
+// Replace with the approriate paths and handlers
+r.get('.*/9gag', process(p9Gag));
+r.get('.*/udemy', process(pUdemy));
+r.get('.*/feng', process(pFeng));
 
-  if (processor == null) return new Response('No support', { status: 400 });
-  const [err, xml] = await processor.start();
-  if (err) {
-    console.error(err);
-    return await fetch(processor.feedUrl)
-  } else return atomResponse(xml);
+async function handleRequest(request:Request) {
+  return await r.route(request);
+}
+
+function process(processor: P9Gag|PUdemy|PFeng) {
+  return (async (request:Request) => {
+    const [err, xml] = await processor.start();
+    if (err) {
+      console.error(err);
+      return await fetch(processor.feedUrl)
+    } else return atomResponse(xml);
+  });
 }
