@@ -6,8 +6,8 @@
     "scripts": {
         "build": "tsc",
         "watch": "tsc -w",
-        "deploy": "wrangler publish",
-        "format": "prettier --write '**/*.{js,css,json,md}'"
+        "preview": "wrangler preview",
+        "publish": "wrangler publish"
     },
     "author": "Rex Pan <napxer@gmail.com>",
     "license": "MIT",
